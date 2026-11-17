@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Route Truck EA1</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#faf8f2;--card:#fff;--tx:#1a1a1a;--mu:#6e6a5e;--bd:#e5e0d0;--ac:#111;--nv:#111;--y:#ffc82c;--yl:#fff4cc;
+--c0:#8a877c;--c1:#3b6ea8;--c2:#2f7d4f;--c3:#2a7f86;--c4:#d99a00;--c5:#c0392b}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Thai","Sarabun",system-ui,sans-serif;font-size:14px;line-height:1.45;font-variant-numeric:tabular-nums}
+.hd{background:var(--nv);color:#fff;padding:14px 0}
+.w{max-width:1600px;margin:0 auto;padding:0 16px}
+.hd .w{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:19px;font-weight:600;margin:0;letter-spacing:.2px}.sub{color:#b9c7d8;font-size:12.5px;margin-top:2px}
+.btn{background:#fff;color:var(--nv);border:0;border-radius:4px;padding:8px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.s{background:var(--card);color:var(--ac);border:1px solid var(--ac);padding:6px 12px;font-weight:500}
+.main{padding-top:16px;padding-bottom:24px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-bottom:14px}
+.k{background:var(--card);border:1px solid var(--bd);border-top:3px solid var(--c0);border-radius:4px;padding:10px 12px;cursor:pointer}
+.k.on{background:#eaf1fb;border-color:var(--ac)}.k b{display:block;font-size:26px;font-weight:600}.k span{color:var(--mu);font-size:12.5px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:4px;padding:14px;margin-bottom:14px}
+.card h2{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--nv)}
+.ch{display:flex;align-items:flex-end;gap:4px;height:130px;overflow-x:auto}
+.col{flex:1;min-width:24px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;cursor:pointer;padding:0 1px}
+.col .st{width:100%;display:flex;flex-direction:column-reverse}
+.col small,.col .n{font-size:11px;color:var(--mu)}.col.on{background:#eaf1fb}.col.on small{color:var(--ac);font-weight:700}
+.f{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.f label{color:var(--mu);font-size:12.5px;min-width:78px}
+.f input,.f select{background:#fff;color:var(--tx);border:1px solid var(--bd);border-radius:4px;padding:7px 8px;font:inherit}
+.f input[type=search]{flex:1;min-width:220px}.f select{min-width:150px;max-width:300px}
+.chip{background:#fff;border:1px solid var(--bd);border-radius:4px;padding:5px 10px;font:inherit;cursor:pointer;color:var(--tx)}
+.chip i{font-style:normal;color:var(--mu);margin-left:6px;font-size:12px}
+.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}.chip.on i{color:#dbe7f7}.chip.z{opacity:.4}
+.tb{overflow:auto;max-height:640px;border:1px solid var(--bd);border-radius:4px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;background:#eef2f7;color:var(--nv);font-weight:600;padding:9px 10px;border-bottom:1px solid var(--bd);white-space:nowrap;position:sticky;top:0}
+td{padding:8px 10px;border-bottom:1px solid #edf1f5;white-space:nowrap}tr:nth-child(even) td{background:#fafbfd}
+.b{display:inline-block;padding:1px 9px;border:1px solid;border-radius:3px;font-size:12px;background:#fff}
+tr.late td{background:#fdf0f0}.lt{color:var(--c5);font-weight:700}
+.dz{border:2px dashed var(--bd);border-radius:6px;padding:40px;text-align:center;color:var(--mu);background:#fff}
+.am{color:var(--c4);font-weight:600}tr.warn td{background:#fff8e6}.wp{border:1px solid var(--bd);border-left:5px solid var(--c2);border-radius:4px;background:#fff;padding:12px 14px;margin-bottom:14px}.wp.r{border-left-color:var(--c5);background:#fff7f7}.wp.y{border-left-color:var(--c4);background:#fffaf0}.wh{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-weight:600;color:var(--nv);margin-bottom:4px}.wh select{background:#fff;border:1px solid var(--bd);border-radius:4px;padding:5px 8px;font:inherit;font-weight:400}.dv{color:var(--mu);font-size:13px;margin-top:2px}.dv a{color:var(--ac);text-decoration:none;font-weight:600}.wi{padding:5px 0;border-top:1px solid var(--bd);font-size:13.5px}.wi.l2 .m{color:var(--c5);font-weight:600}.wi.l1 .m{color:var(--c4);font-weight:600}
+.hd{background:#111;border-bottom:4px solid var(--y)}.hd .sub{color:#d6d1bf}.btn{background:var(--y);color:#111}.btn.s{background:#fff;color:#111;border:1px solid #111}
+.k:first-child{border-top-color:#111}.k.on{background:var(--yl);border-color:#111}.col.on{background:var(--yl)}.col.on small{color:#111}
+.chip.on{background:#111;border-color:#111;color:var(--y)}.chip.on i{color:#e8d48a}
+th{background:var(--yl);color:#111;border-bottom:2px solid #111}tr:nth-child(even) td{background:#fcfbf6}tr.late td{background:#fdecea}tr.warn td{background:#fff6d6}
+.dv a{color:#111;text-decoration:underline;text-decoration-color:var(--y);text-decoration-thickness:2px}
+.wh select,.f select,select option{color:#111;background:#fff;font-weight:400}.wh select{min-width:200px}
+.tag{background:var(--y);color:#111;border-radius:3px;padding:0 6px;font-size:11.5px;font-weight:600}
+:root{color-scheme:dark;--bg:#0a0a0a;--card:#141413;--tx:#f2f0e8;--mu:#a5a293;--bd:#2d2c27;--ac:#ffc82c;--nv:#ffc82c;--yl:#2b2410;--y:#ffc82c;--c0:#9a978a;--c1:#5b9bd5;--c2:#4caf74;--c3:#3fb2b8;--c4:#ffc82c;--c5:#ef6a5b}
+.hd{background:#000;border-bottom:3px solid var(--y)}.hd .sub{color:#b9b6a8}.btn{background:var(--y);color:#111}.btn.s{background:transparent;color:var(--y);border:1px solid var(--y)}
+.k:first-child{border-top-color:var(--y)}.k.on{background:var(--yl);border-color:var(--y)}.col.on{background:var(--yl)}.col.on small{color:var(--y)}
+.f input,.f select,.wh select,.chip{background:#1c1c1a;color:var(--tx);border:1px solid var(--bd)}.f input::placeholder{color:var(--mu)}select option{background:#1c1c1a;color:#f2f0e8}
+.chip.on{background:var(--y);border-color:var(--y);color:#111}.chip.on i{color:#4a3b00}
+th{background:#1f1d14;color:var(--y);border-bottom:2px solid var(--y)}td{border-bottom:1px solid #24231f}tr:nth-child(even) td{background:#181816}tr.late td{background:#3a1a17}tr.warn td{background:#2e2710}
+.wp{background:#141413;border-color:var(--bd)}.wp.r{background:#2a1513}.wp.y{background:#2a2410}.wi{border-top-color:var(--bd)}.b{background:transparent}.dv a{color:var(--y);text-decoration-color:var(--y)}.dz{background:#141413;border-color:var(--bd)}.tb{border-color:var(--bd)}.tag{background:var(--y);color:#111}
+.tabs{display:flex;gap:8px;padding-top:14px;padding-bottom:0}.tab{background:#1c1c1a;color:var(--tx);border:1px solid var(--bd);border-radius:4px;padding:8px 18px;font:inherit;cursor:pointer}.tab.on{background:var(--y);color:#111;border-color:var(--y);font-weight:600}
+.upload-actions{display:flex;gap:8px;flex-wrap:wrap}.bag-dialog{width:min(1180px,calc(100% - 24px));max-height:92vh;padding:0;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx)}.bag-dialog::backdrop{background:rgba(0,0,0,.72)}.bag-dialog-head{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px;background:var(--card);border-bottom:1px solid var(--bd)}.bag-dialog-head h2{margin:0;font-size:18px}.bag-dialog-body{max-height:calc(92vh - 74px);overflow:auto;padding:16px}.bag-dialog-summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.bag-dialog-summary span{padding:7px 10px;border:1px solid var(--bd);border-radius:4px}.bag-dialog .tb{max-height:58vh}.bag-dialog .f input{min-width:220px}.bag-dialog-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bag-copy-status{color:var(--mu);font-size:12px}.bag-copy-text{width:100%;min-height:84px;resize:vertical;background:#1c1c1a;color:var(--tx);border:1px solid var(--bd);border-radius:4px;padding:8px;font:inherit}.bag-time-red{background:#711f1f!important;color:#fff!important;font-weight:700}.bag-time-red-soft{background:#4a2020!important;color:#ffc1b8!important;font-weight:700}.detail-btn{background:var(--y);color:#111;border:0;border-radius:4px;padding:5px 9px;font:inherit;font-weight:600;cursor:pointer}.detail-btn:disabled{opacity:.4;cursor:not-allowed}.detail-row{cursor:pointer}.detail-row:hover td{filter:brightness(.88)}.bag-dialog-empty{padding:22px;text-align:center;color:var(--mu)}
+.bag-chart-wrap{overflow:auto;border:1px solid var(--bd);border-radius:4px;background:var(--card)}.bag-chart{display:block;max-width:none;transform-origin:center top;animation:chart-arrive .32s ease-out both}.bag-chart text{font-family:"Noto Sans Thai","Sarabun",system-ui,sans-serif;font-size:12px;fill:var(--mu)}.bag-chart .axis-title{font-size:13px;fill:var(--tx);font-weight:600}.bag-chart .grid{stroke:var(--bd);stroke-width:1;transition:opacity .25s ease}.bag-chart .area{opacity:0;animation:chart-area .7s ease-out .25s forwards}.bag-chart .line{fill:none;stroke-width:2.7;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 3px currentColor);animation:chart-draw .85s cubic-bezier(.22,.7,.25,1) forwards}.bag-chart .point{stroke:var(--card);stroke-width:2;cursor:pointer;transform-box:fill-box;transform-origin:center;animation:chart-point .35s ease-out both;transition:r .18s ease,filter .18s ease}.bag-chart .point:hover{r:7;filter:brightness(1.3) drop-shadow(0 0 4px currentColor)}.bag-chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 0}.bag-chart-legend span{display:inline-flex;align-items:center;gap:6px}.bag-chart-legend i{width:11px;height:11px;border-radius:50%;display:inline-block;transition:transform .18s ease,box-shadow .18s ease}.bag-chart-legend span:hover i{transform:scale(1.35);box-shadow:0 0 8px currentColor}.bag-time-chart .time-segment{cursor:pointer;transform-box:fill-box;transform-origin:center bottom;animation:bar-rise .55s cubic-bezier(.2,.8,.2,1) both;transition:filter .18s ease}.bag-time-chart .time-segment:hover{filter:brightness(1.3)}.bag-summary-grid{display:grid;grid-template-columns:minmax(320px,1fr) minmax(0,1.6fr);gap:12px;align-items:stretch}.bag-summary-grid>.card{min-width:0;margin:0}.bag-summary-grid .bag-donut-wrap{display:flex;flex-direction:column;justify-content:center;gap:20px;min-height:490px;height:calc(100% - 47px);padding:20px}.bag-summary-grid .bag-donut{width:min(320px,88%);height:auto;flex:none}.bag-summary-grid .bag-donut-legend{width:min(300px,100%);font-size:15px;gap:16px}.bag-summary-grid .bag-donut-legend span{justify-content:flex-start}.bag-donut{width:210px;height:210px;overflow:visible}.bag-donut circle{fill:none;stroke-width:24;transition:stroke-dasharray .35s ease,stroke-dashoffset .35s ease,filter .2s ease}.bag-donut circle[role=button]{cursor:pointer}.bag-donut circle[role=button]:hover,.bag-donut circle[role=button]:focus-visible{filter:brightness(1.25) drop-shadow(0 0 5px currentColor);outline:none}.bag-donut-center{font-size:25px;fill:var(--tx);font-weight:700;text-anchor:middle}.bag-donut-caption{font-size:11px;fill:var(--mu);text-anchor:middle}.bag-donut-legend{display:grid;gap:12px}.bag-donut-legend span{display:flex;align-items:center;gap:8px;color:var(--tx)}.bag-donut-legend i{width:12px;height:12px;border-radius:50%;display:inline-block}.bag-donut-legend b{margin-left:8px}.bag-donut-summary{margin:8px 0;color:var(--mu)}@media(max-width:850px){.bag-summary-grid{grid-template-columns:1fr}.bag-summary-grid .bag-donut-wrap{min-height:360px}.bag-summary-grid .bag-donut{width:min(280px,80%)}}@media(prefers-reduced-motion:reduce){.bag-time-chart .time-segment,.bag-donut circle{animation:none;transition:none}}
+@keyframes chart-arrive{from{opacity:.4;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@keyframes chart-draw{to{stroke-dashoffset:0}}@keyframes chart-point{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}@keyframes chart-area{to{opacity:.12}}@media(prefers-reduced-motion:reduce){.bag-chart,.bag-chart .line,.bag-chart .point{animation:none;opacity:1}.bag-chart .area{animation:none;opacity:.12}}
+.bag-upload-help{flex-basis:100%;margin-top:4px;color:#d0cbbb;font-size:11px;line-height:1.55}.bag-expiry-copy{flex:1;min-width:260px}.bag-expiry-help{margin-top:4px;color:#d0cbbb;font-size:11px;line-height:1.55}.bag-expiry-notice{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:11px 14px;margin-bottom:12px;border:1px solid #9a6b00;border-left:5px solid var(--y);border-radius:4px;background:#28210e;color:var(--tx);animation:chart-arrive .25s ease-out}.bag-expiry-notice[hidden]{display:none}.bag-expiry-notice.expired{border-color:#b9382c;border-left-color:#ef5145;background:#351714}.bag-expiry-notice button{background:var(--y);color:#111;border:0;border-radius:4px;padding:7px 12px;font:inherit;font-weight:600;cursor:pointer}.kp .k{transition:transform .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease}.kp .k:hover,.kp .k:focus-visible{transform:translateY(-3px);box-shadow:0 7px 18px rgba(255,200,44,.16);outline:2px solid var(--y);outline-offset:1px}.kp .k:active{transform:translateY(-1px) scale(.99)}.kp .k b{transition:color .18s ease}.kp .k.on{box-shadow:inset 0 0 0 1px var(--y)}.ch .col{border-radius:4px 4px 0 0;transition:background-color .2s ease,transform .2s ease,filter .2s ease}.ch .col:hover,.ch .col:focus-visible{background:var(--yl);transform:translateY(-3px);filter:brightness(1.12);outline:1px solid var(--y);outline-offset:1px}.ch .col .st>div{transform-origin:center bottom;animation:bar-rise .55s cubic-bezier(.2,.8,.2,1) both;transition:filter .18s ease}.ch .col:hover .st>div,.ch .col:focus-visible .st>div{filter:brightness(1.22)}@keyframes bar-rise{from{transform:scaleY(.08);opacity:.35}to{transform:scaleY(1);opacity:1}}.k.metric-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.k.metric-card:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(255,200,44,.12)}.k.metric-card.active{background:var(--yl);outline:2px solid var(--y);outline-offset:1px}@media(prefers-reduced-motion:reduce){.kp .k,.ch .col,.ch .col .st>div{animation:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="hd"><div class="w"><div><h1>Truck Distubution Route Plan EA1 (Fleet Plan)</h1><div class="sub" id="meta"></div></div>
+<div class="upload-actions"><input type="file" id="fi" accept=".xlsx,.xls,.csv" hidden><button class="btn" onclick="fi.click()">Fleet Plan</button><input type="file" id="bagFi" accept=".xlsx,.xls,.csv" hidden><button class="btn" title="เลือกไฟล์รายงานถุงแบ็กกิ้งจากระบบ" onclick="bagFi.click()">อัปโหลดไฟล์ถุงแบ็กกิ้ง</button><div class="bag-upload-help">ใช้ไฟล์รายงานรายละเอียดถุงแบ็กกิ้ง (.xlsx, .xls หรือ .csv) ไม่ใช่ไฟล์แผนรอบรถ · ต้องมีคอลัมน์ เลขแบ็กกิ้ง, สถานะแบ็กกิ้ง, จำนวน Bagging, สาขาปลายทาง และ เวลาแบ็กกิ้ง Uploads stay in this browser; they are not sent to GitHub Pages.</div></div></div></div>
+<div class="w tabs"><button class="tab on" id="t1" onclick="tab(1)">รอบรถ</button><button class="tab" id="t2" onclick="tab(2)">ถุงแบ็กกิ้ง เทียบรอบรถ</button></div><div class="w main"><div id="app"></div><div id="app2" hidden></div><div class="dz" id="dz" hidden>Upload a Fleet Plan file or bagging details file to start. Uploaded data stays in this browser only.</div></div>
+<dialog id="bagDialog" class="bag-dialog" aria-labelledby="bagDialogTitle"><div class="bag-dialog-head"><h2 id="bagDialogTitle">รายละเอียดถุงแบ็กกิ้ง</h2><div class="bag-dialog-actions"><button class="btn s" type="button" onclick="copyBagDetails()">คัดลอกเลขถุง + จำนวนชิ้น</button><button class="btn s" type="button" onclick="closeBagDetails()">ปิด</button></div></div><div class="bag-dialog-body" id="bagDialogBody"></div></dialog>
+<script>
+const ST=[["รอเปิดใช้งาน","รอเปิดใช้งาน","--c0"],["ถึงสาขาต้นทาง","รถถึงต้นทาง","--c1"],["รถออกแล้ว","ออกเดินทางแล้ว","--c2"],["วิ่งจบแล้ว","วิ่งจบแล้ว","--c3"],["รอยกเลิก","รอยกเลิก","--c4"],["ยกเลิกเรียบร้อย","ยกเลิกแล้ว","--c5"]];
+const stOf=s=>{s=s||"";const i=ST.findIndex(x=>s.includes(x[0]));return i<0?0:i};
+const A0=()=>({st:new Set(),belt:new Set(),mode:new Set(),stop:"",type:new Set(),veh:new Set(),attr:new Set(),co:"",dest:"",q:"",from:"",to:"",hour:-1,late:false,early:false,warn:false});
+let A=A0(),rows=[],nowS="";
+const g=(r,k)=>r[k]==null?"":String(r[k]).trim(),T=s=>s.slice(11,16),pad=n=>String(n).padStart(2,"0");
+const $=id=>document.getElementById(id);
+function stopsOf(n,o){const p=n.split("-");let i=o?p.indexOf(o):2;if(i<0)i=2;const out=[];for(const t of p.slice(i+1)){if(/^\d{2}:\d{2}$/.test(t)||/^\d{8}/.test(t))break;out.push(t)}return out}
+let BM={"17 NO5_HUB-พิษณุโลก": "LH", "25 EA2_HUB-ระยอง": "LH", "02 NE1_HUB-นครราชสีมา": "LH", "21 BPL_BHUB-บางพลี": "LH", "20 NE6_HUB-บุรีรัมย์": "LH", "22 PDT_BHUB-บ่อวิน": "LH", "05 LAS_HUB-ลาซาล": "LH", "11 NE4_HUB-อุบลราชธานี": "LH", "04 NO1_HUB-นครสวรรค์": "LH", "27 KKC_BHUB-ขอนแก่น": "LH", "03 SO1_HUB-สุราษฏร์ธานี": "LH", "16 Central_HUB-วังน้อย": "LH", "09 NE2_HUB-ขอนแก่น": "LH", "15 NE5_HUB-ยโสธร": "LH", "23 AYU_BHUB-วังน้อย": "LH", "06 NO2_HUB-ลำปาง": "LH", "10 NE3_HUB-อุดรธานี": "LH", "38 URT_BHUB-สุราษฏร์ธานี": "LH", "08 NO4_HUB-เชียงราย": "LH", "65 WNO_BHUB-วังน้อย": "LH", "37 PHS_BHUB-พิษณุโลก": "LH", "07 NO3_HUB เชียงใหม่": "LH", "24 NE7_HUB-สกลนคร": "LH", "13 SO5_HUB-พังงา": "LH", "18 SO4_HUB-นครศรีธรรมราช": "LH", "14 SO3_HUB-ชุมพร": "LH", "12 SO2_HUB - หาดใหญ่": "LH", "4SRA_BSP-สระแก้ว": "E08", "2PAN_BDC-พานทอง": "E08", "4PRA_BSP-ปราจีนบุรี": "E08", "4KBI_BSP-กบินทร์บุรี": "E08", "4NAD_BSP-นาดี": "E08", "2BAB_BDC-บ้านบึง": "E08", "2SRP_BDC-ศรีมหาโพธิ": "E08", "WTC_SP-วังท่าช้าง": "E05", "Drop_7PRA_DC-บ้านสร้าง": "E08", "2UTP_BDC-ชลบุรี": "E08", "Drop_2SRP_BDC-ดงบัง": "E08", "2SSU_BDC-แสนสุข": "E08", "Drop_7KBI_DC-วังท่าช้าง": "E08", "4KCG_BSP-เขาฉกรรจ์": "E08", "7ART_DC-อรัญประเทศ": "E08", "2NMD_BDC-หนองไม้แดง": "E08", "4ART_BSP-อรัญประเทศ": "E08", "PRA_SP-ปราจีนบุรี": "E08", "BSX_SP-บ้านสร้าง": "E08", "PCT_SP-ประจันตคาม": "E07", "SRS_SP-สุรศักดิ์": "E07", "SRC_SP-ศรีราชา": "E07", "PTY_SP-พัทยา": "E07", "NGA_SP-นาเกลือ": "E07", "BUG_SP-บึง": "E07", "4CHA_BSP-ฉะเชิงเทรา": "E07", "TAQ_SP-ตะเคียนเตี้ย": "E07", "SLD_SP-ศาลาแดง": "E07", "NPW_SP-เนินพลับหวาน": "E07", "4KLG_BSP-แกลง": "E07", "8PLY_SP-แปลงยาว": "E07", "PLD_SP-ปลวกแดง": "E07", "STH_SP-สัตหีบ": "E07", "CHA_SP-ฉะเชิงเทรา": "E07", "4PMK_BSP-พนมสารคาม": "E07", "KIG_SP-เขาคิชฌกูฏ": "E07", "NYI_SP-หนองใหญ่": "E07", "KHC_SP-เขาหินซ้อน": "E07", "KGN_SP-เกาะจันทร์": "E07", "4NRE_BSP-หนองรี": "E07", "BLM_SP-บางละมุง": "E07", "4BAG_BSP-บางปะกง": "E07", "8BNP_BDC-บางน้ำเปรี้ยว": "E07", "4WSB_BSP-วังสมบูรณ์": "E07", "Drop_SOD_SP-ทุ่งขนาน": "E07", "BSG_SP-บางสมัคร": "E06", "BWN_SP-บ่อวิน": "E06", "4SSU_BSP-แสนสุข": "E06", "PNN_SP-พนัสนิคม": "E06", "4SRP_BSP-ศรีมหาโพธิ": "E06", "UTP_SP-ชลบุรี": "E06", "4WNY_BSP-วังน้ำเย็น": "E06", "THS_SP-เทพประสิทธิ์": "E06", "SSU_SP-แสนสุข": "E06", "4BAB_BSP-บ้านบึง": "E06", "PEK_SP-บ้านปึก": "E06", "SMP_SP-บ้านทาม": "E06", "4PNN_BSP-พนัสนิคม": "E06", "BAP_SP-บางพระ": "E06", "SST_SP-ศรีมโหสถ": "E06", "4SAE_BSP-แซร์ออ": "E06", "BHK_SP-บางคล้า": "E06", "4WNK_BSP-วัฒนานคร": "E06", "BSN_SP-บ้านสวน": "E06", "GOR_SP-เกาะล้าน": "E06", "Drop_PNN_SP-วัดหลวง": "E06", "2TTK_BDC-ท่าตะเกียบ": "E06", "2WNK_BDC-วัฒนานคร": "E06", "KKS_SP-เขาคันทรง": "E06", "2BOT_BDC-บ่อทอง": "E06", "NCQ_SP-หนองชาก": "E06", "4TPL_BSP-ตาพระยา": "E06", "Drop_NPK_SP-หนองชาก": "E06", "BUS_SP-โสธร": "E06", "4NAY_BSP-นครนายก": "E05", "KPW_SP-คลองประเวศ": "E05", "4NMD_BSP-หนองไม้แดง": "E05", "PYI_SP-พัทยาใต้": "E05", "4NGT_BSP-นาจอมเทียน": "E05", "SRI_SP-สาริกา": "E05", "4UTP_BSP-ชลบุรี": "E05", "JER_SP-เจิมจอมพล": "E05", "2WNY_BDC-วังน้ำเย็น": "E05", "PNC_SP-เพนียดช้าง": "E05", "POG_SP-โป่ง": "E05", "GKO_SP-หนองค้อ": "E05", "4HYI_BSP-ห้วยใหญ่": "E05", "2NGH_BDC-หนองกะขะ": "E05", "NPK_SP-หนองไผ่แก้ว": "E05", "Drop-2WNY_BDC-วังสมบูรณ์": "E05", "4NHO_BSP-หนองขาม": "E05", "4BOT_BSP-บ่อทอง": "E05", "TCH_SP-ท่าช้าง": "E05", "4TTK_BSP-ท่าตะเกียบ": "E05", "4NGH_BSP-หนองกะขะ": "E05", "MPI_SP-มาบไผ่": "E05", "8SCK_SP-สนามชัยเขต": "E05", "4BAD_BSP-บางปลากด": "E05", "2SAE_BDC-แซร์ออ": "E05", "5UTP_PDC-ชลบุรี": "E05", "BPN_SP-บางผึ้ง": "E05", "BPO_SP-บ้านโพธิ์": "E05", "Drop_SNG_DC-หนองดินแดง": "E05", "NPL_SP-หนองปลาไหล": "E05", "Drop_8SCK_SP-ท่ากระดาน": "E05", "4SCK_SP-สนามชัยเขต": "E05", "Drop-JER-SP-ศรีราชา": "E05", "Drop_2BAD_BDC-องครักษ์": "E05", "ONK_SP-องครักษ์": "E05", "WHL_SP-วัดหลวง": "E06", "TGD_SP-ท่ากระดาน": "E05"};
+function norm(raw){return raw.map(r=>{const rel=g(r,"เวลาปล่อยรถ");return{name:g(r,"ชื่อเส้นทางเดินรถ"),type:g(r,"ประเภทเส้นทางเดินรถ"),attr:g(r,"คุณลักษณะเส้นทางเดินรถ"),co:g(r,"บริษัท").split(" (")[0],belt:BM[g(r,"สาขาปลายทาง")]||"พ่วงงานสาขา",stops:stopsOf(g(r,"ชื่อเส้นทางเดินรถ"),g(r,"สาขาต้นทาง_ตัวย่อ")),veh:g(r,"ชนิดของรถ"),
+ plate:g(r,"เลขทะเบียนรถ"),stby:g(r,"เวลาสแตนบายที่สาขาต้นทาง"),rel,dest:g(r,"สาขาปลายทาง_ตัวย่อ"),destN:g(r,"สาขาปลายทาง"),end:g(r,"เวลาสิ้นสุด"),drv:g(r,"ชื่อคนขับหลัก"),tel:g(r,"เบอร์โทรศัพท์คนขับหลัก"),s:stOf(g(r,"สถานะงานเส้นทางการเดินรถ")),h:+rel.slice(11,13)}}).filter(r=>r.name).map(r=>{r.mode=r.stops.length>1||r.belt==="พ่วงงานสาขา"?"พ่วงดรอป":"ปลายทางเดียว";r.via=r.mode==="พ่วงดรอป"?r.stops:[];return r})}
+const late=r=>r.rel&&r.rel<nowS&&r.s<2;
+function ok(r,k){
+ if(k!=="st"&&A.st.size&&!A.st.has(r.s))return 0;
+ for(const d of["belt","mode","type","veh","attr"])if(k!==d&&A[d].size&&!A[d].has(r[d]))return 0;
+ if(k!=="co"&&A.co&&r.co!==A.co)return 0;if(k!=="dest"&&A.dest&&r.dest!==A.dest)return 0;
+ if(k!=="hour"&&A.hour>=0&&r.h!==A.hour)return 0;
+ if(A.from&&T(r.rel)<A.from)return 0;if(A.to&&T(r.rel)>A.to)return 0;
+ if(A.late&&!late(r))return 0;if(k!=="early"&&A.early&&T(r.rel)>"07:00")return 0;if(k!=="warn"&&A.warn&&!r.w)return 0;if(k!=="stop"&&A.stop&&!r.via.includes(A.stop))return 0;
+ if(A.q&&!(r.name+r.plate+r.drv+r.destN+r.co).toLowerCase().includes(A.q.toLowerCase()))return 0;return 1}
+const f=k=>rows.filter(r=>ok(r,k));
+function tg(d,v){const s=A[d];s.has(v)?s.delete(v):s.add(v);draw()}
+function tgh(h){A.hour=A.hour===h?-1:h;draw()}
+function clr(){A=A0();$("q").value=$("tf").value=$("tt").value="";draw()}
+function soon(){const n=new Date(),e=new Date(n.getTime()+7200000);A.from=pad(n.getHours())+":"+pad(n.getMinutes());A.to=e.getDate()!==n.getDate()?"23:59":pad(e.getHours())+":"+pad(e.getMinutes());$("tf").value=A.from;$("tt").value=A.to;draw()}
+function cntBy(list,k){const m={};list.forEach(r=>m[r[k]]=(m[r[k]]||0)+1);return m}
+function chips(d,lab){const m=cntBy(f(d),d);const all=[...new Set(rows.map(r=>r[d]))].filter(Boolean).sort();
+ return '<div class="f"><label>'+lab+'</label>'+all.map(v=>'<button class="chip'+(A[d].has(v)?" on":"")+(m[v]?"":" z")+'" onclick="tg(\''+d+'\',\''+v+'\')">'+v+'<i>'+(m[v]||0)+'</i></button>').join("")+'</div>'}
+function sel(d,lab,id){const m=cntBy(f(d),d),nm={};rows.forEach(r=>{if(r[d])nm[r[d]]=d==="dest"?r.destN:r[d]});const all=Object.keys(nm).filter(v=>m[v]||A[d]===v).sort((a,b)=>nm[a].localeCompare(nm[b]));
+ return '<select onchange="A.'+d+'=this.value;draw()"><option value="">'+lab+': ทั้งหมด</option>'+all.map(v=>'<option value="'+v+'"'+(A[d]===v?" selected":"")+'>'+nm[v]+' ('+(m[v]||0)+')</option>').join("")+'</select>'}
+let W=30;const mins=s=>(new Date(s.slice(0,10)+"T"+s.slice(11,16))-new Date())/60000;
+function wr(r){if(r.rel.slice(0,10)!==nowS.slice(0,10)||r.s>1)return null;const tr=mins(r.rel),ts=r.stby?mins(r.stby):null,nm=Math.round,w0=r.s===0;
+ if(tr<0)return{lv:2,m:"เลยเวลาปล่อย "+nm(-tr)+" นาที"+(w0?" · รถยังไม่ถึงต้นทาง":" · รถถึงต้นทางแล้ว")};
+ if(w0&&ts!=null&&ts<0)return{lv:2,m:"เลยเวลาสแตนบาย "+nm(-ts)+" นาที · รถยังไม่ถึงต้นทาง (ปล่อยในอีก "+nm(tr)+" นาที)"};
+ if(w0&&ts!=null&&ts<=W)return{lv:1,m:"ใกล้เวลาสแตนบายอีก "+nm(ts)+" นาที · รถยังไม่ถึงต้นทาง"};
+ if(w0&&tr<=W)return{lv:1,m:"ใกล้เวลาปล่อยอีก "+nm(tr)+" นาที · รถยังไม่ถึงต้นทาง"};return null}
+function renderWP(){const td=rows[0].rel.slice(0,10)===nowS.slice(0,10),ws=rows.filter(r=>r.w).sort((a,b)=>b.w.lv-a.w.lv||a.rel.localeCompare(b.rel)),n2=ws.filter(r=>r.w.lv===2).length,n1=ws.length-n2;
+ const sl='<select onchange="W=+this.value;draw()">'+[15,30,45,60,90].map(v=>'<option value="'+v+'"'+(W===v?" selected":"")+'>เฝ้าระวังล่วงหน้า '+v+' นาที</option>').join("")+'</select>';
+ $("wp").className="wp "+(!td?"":n2?"r":n1?"y":"");
+ $("wp").innerHTML=!td?'<div class="wh">การแจ้งเตือนปิดอยู่ เพราะข้อมูลไม่ใช่ของวันนี้</div>':'<div class="wh"><span>แจ้งเตือน</span><span style="color:var(--c5)">เร่งด่วน '+n2+' รอบ</span><span style="color:var(--c4)">เฝ้าระวัง '+n1+' รอบ</span><span style="flex:1"></span>'+sl+'</div>'+(ws.length?ws.slice(0,8).map(r=>'<div class="wi l'+r.w.lv+'"><div><b>'+T(r.rel)+'</b> '+r.destN+' · '+r.plate+' · '+r.co+' &nbsp;<span class="m">'+r.w.m+'</span></div><div class="dv">พขร. '+(r.drv||"-")+' · โทร '+(r.tel?'<a href="tel:'+r.tel+'">'+r.tel+'</a>':"-")+'</div></div>').join("")+(ws.length>8?'<div class="wi" style="color:var(--mu)">และอีก '+(ws.length-8)+' รอบ กด “เฉพาะรอบที่มีแจ้งเตือน” เพื่อดูทั้งหมด</div>':""):'<div class="wi">ไม่มีรอบที่ต้องเฝ้าระวังในขณะนี้</div>')}
+let BG=[],B={q:"",belt:new Set(),lv:new Set(),all:false},sh2=false;
+const LV=[["ไม่มีของค้าง"],["ปกติ (มีรอบรองรับ)"],["ใกล้ปล่อย ของยังค้าง"],["เร่งด่วน"]],fm=n=>n.toLocaleString("en-US");
+const sc=s=>s.includes("แบ็กกิ้งแล้ว")?0:s.includes("ระหว่างการขนส่ง")?1:2;
+const BAG_REFRESH_MS=45*60*1000;
+let bagMetric="all",bagExpiresAt=0,bagDataExpired=false;
+let BagDetails=[],visibleBagGroups=[],activeBagDetails=[],bagFileName="";
+function loadBags(raw,fileName=""){
+ const details=raw.map(r=>({id:g(r,"เลขแบ็กกิ้ง"),type:g(r,"ประเภทแบ็กกิ้ง"),status:g(r,"สถานะแบ็กกิ้ง"),qty:Number(g(r,"จำนวน Bagging").replace(/,/g,""))||0,openQty:g(r,"จำนวนเปิด Bagging"),source:g(r,"สาขาต้นทาง"),dest:g(r,"สาขาปลายทาง"),grid:g(r,"Grid code"),time:g(r,"เวลาแบ็กกิ้ง"),employee:g(r,"พนักงานแบ็กกิ้ง"),openTime:g(r,"เวลาเปิดถุงแบ็กกิ้ง"),openEmployee:g(r,"พนักงานเปิดถุงแบ็กกิ้ง")})).filter(r=>r.id||r.dest||r.qty);
+ if(!details.length)throw new Error("ไม่พบรายการถุงแบ็กกิ้งในไฟล์");
+ BagDetails=details;BG=details.map(r=>[sc(r.status),r.qty,r.dest,r.time]);bagFileName=fileName;bagExpiresAt=fileName?Date.now()+BAG_REFRESH_MS:0;bagDataExpired=false;sh2=false;tab(2)
+}
+function updateBagExpiry(){
+ const notice=$("bagExpiryNotice");if(!notice)return;
+ if(!bagExpiresAt&&!bagDataExpired){notice.hidden=true;return}
+ notice.hidden=false;
+ if(bagExpiresAt){
+  const left=bagExpiresAt-Date.now();
+  if(left<=0){
+   BG=[];BagDetails=[];bagFileName="";bagExpiresAt=0;bagDataExpired=true;B.q="";B.belt.clear();B.lv.clear();B.all=false;bagMetric="all";if($("q2"))$("q2").value="";
+   notice.classList.add("expired");$("bagExpiryText").textContent="ข้อมูลถุงครบ 45 นาทีแล้วและถูกล้างออกจากหน้าเว็บ กรุณาอัปโหลดไฟล์ถุงแบ็กกิ้งฉบับใหม่";if(!$("app2").hidden)render2();return
+  }
+  const minutes=Math.floor(left/60000),seconds=Math.floor(left%60000/1000);notice.classList.remove("expired");$("bagExpiryText").textContent="อัปเดตข้อมูลถุงภายใน "+minutes+":"+String(seconds).padStart(2,"0")+" นาที · ระบบจะล้างข้อมูลเก่าเมื่อครบ 45 นาที"
+ }else{notice.classList.add("expired");$("bagExpiryText").textContent="กรุณาอัปโหลดไฟล์ถุงแบ็กกิ้งฉบับใหม่"}
+}
+function toggleBagMetric(metric){bagMetric=bagMetric===metric?"all":metric;render2()}
+const escapeHtml=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const isBaggingComplete=r=>r.status.includes("แบ็กกิ้งแล้ว");
+function baggingTimeLabel(time){const hhmm=String(time||"").slice(11,16);if(!/^\d{2}:\d{2}$/.test(hhmm))return{label:"",className:""};if(hhmm<"07:00")return{label:"ก่อน 07:00",className:"bag-time-red"};if(hhmm<"12:00")return{label:"ก่อน 12:00",className:"bag-time-red-soft"};return{label:"",className:""}}
+function showBagDetailsByIndex(i){
+ const group=visibleBagGroups[i];if(!group)return;
+ showBagDetailsForDest(group.d)
+}
+function showBagDetailsForDest(dest){
+ const group=grp().find(o=>o.d===dest)||{d:dest,belt:BM[dest]||"-"};
+ const records=BagDetails.length?BagDetails.filter(r=>r.dest===dest):BG.filter(r=>r[2]===dest).map(r=>({id:"ไม่ระบุ",type:"ข้อมูลสรุป",status:r[0]===0?"แบ็กกิ้งแล้ว":r[0]===1?"ระหว่างการขนส่ง":"ไม่ระบุสถานะ",qty:r[1],openQty:"-",source:"-",dest:r[2],grid:"-",time:r[3],employee:"-",openTime:"-",openEmployee:"-"}));
+ activeBagDetails=records;
+ const fields=[["ชื่อสาขา",r=>r.dest],["เลขแบ็กกิ้ง",r=>r.id],["ประเภท",r=>r.type],["สถานะ",r=>r.status],["จำนวนชิ้น",r=>fm(r.qty)],["จำนวนเปิด",r=>r.openQty],["สาขาต้นทาง",r=>r.source],["Grid code",r=>r.grid],["เวลาแบ็กกิ้ง",r=>r.time],["พนักงานแบ็กกิ้ง",r=>r.employee],["เวลาเปิดถุง",r=>r.openTime],["พนักงานเปิดถุง",r=>r.openEmployee]];
+ $("bagDialogTitle").textContent="รายละเอียดถุงแบ็กกิ้ง — "+group.d;
+ $("bagDialogBody").innerHTML='<div class="bag-dialog-summary"><span>จำนวนถุง: <b>'+fm(records.length)+'</b></span><span>จำนวนชิ้น: <b>'+fm(records.reduce((n,r)=>n+(r.qty||0),0))+'</b></span><span>สายพาน: <b>'+escapeHtml(group.belt)+'</b></span><span>สถานะแบ็กกิ้งแล้ว: <b>'+fm(records.filter(isBaggingComplete).length)+' ถุง</b></span></div>'+(BagDetails.length?"":'<p class="sub">แสดงข้อมูลสรุปที่มีในหน้าเว็บ หากต้องการเลขแบ็กกิ้งและข้อมูลพนักงาน ให้อัปโหลดไฟล์รายละเอียดถุงแบ็กกิ้ง</p>')+'<div class="f"><input type="search" id="bagDetailSearch" placeholder="ค้นหาเลขถุง / สถานะ / พนักงาน" oninput="filterBagDetails()"><span class="bag-copy-status" id="bagCopyStatus" role="status"></span></div><textarea id="bagCopyText" class="bag-copy-text" readonly aria-label="ข้อความสำหรับคัดลอก" hidden></textarea><div class="tb"><table><thead><tr>'+fields.map(([name])=>'<th>'+name+'</th>').join("")+'<th>คัดลอก</th></tr></thead><tbody id="bagDetailRows">'+(records.length?records.map((r,i)=>{const flag=baggingTimeLabel(r.time);return'<tr>'+fields.map(([name,get])=>'<td'+(name==="เวลาแบ็กกิ้ง"&&flag.className?' class="'+flag.className+'" title="'+flag.label+'"':"")+'>'+escapeHtml(get(r))+(name==="เวลาแบ็กกิ้ง"&&flag.label?'<br><small>'+flag.label+'</small>':"")+'</td>').join("")+'<td>'+(BagDetails.length&&isBaggingComplete(r)?'<button class="detail-btn" type="button" onclick="copyBagDetails('+i+')">คัดลอก</button>':'-')+'</td></tr>'}).join(""):'<tr><td colspan="'+(fields.length+1)+'" class="bag-dialog-empty">ไม่พบข้อมูลถุงสำหรับปลายทางนี้</td></tr>')+'</tbody></table></div>';
+ $("bagDialog").showModal()
+}
+async function copyBagDetails(index){
+ const query=$("bagDetailSearch")?$("bagDetailSearch").value.trim().toLowerCase():"";
+ const bagged=activeBagDetails.filter(isBaggingComplete),records=typeof index==="number"?[activeBagDetails[index]].filter(r=>r&&isBaggingComplete(r)):bagged.filter(r=>!query||Object.values(r).join(" ").toLowerCase().includes(query));
+ const status=$("bagCopyStatus");if(!BagDetails.length){if(status)status.textContent="กรุณาอัปโหลดไฟล์รายละเอียดถุงเพื่อคัดลอกเลขถุง";return}if(!records.length){if(status)status.textContent=typeof index==="number"?"คัดลอกได้เฉพาะถุงสถานะ “แบ็กกิ้งแล้ว”":"ไม่มีถุงสถานะ “แบ็กกิ้งแล้ว” ในรายการที่ค้นหา";return}
+ const text="ชื่อสาขา\tเลขแบ็กกิ้ง\tจำนวนชิ้น\n"+records.map(r=>r.dest+"\t"+r.id+"\t"+r.qty).join("\n"),area=$("bagCopyText");
+ area.value=text;area.hidden=false;
+ try{
+  if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);
+  else{area.focus();area.select();if(!document.execCommand("copy"))throw new Error("Clipboard is blocked")}
+  if(status)status.textContent="คัดลอกแล้ว "+records.length+" รายการ เฉพาะสถานะ “แบ็กกิ้งแล้ว”"
+ }catch(e){area.focus();area.select();if(status)status.textContent="เบราว์เซอร์บล็อกการคัดลอก: เลือกข้อความด้านล่าง แล้วกด Ctrl+C"}
+}
+function filterBagDetails(){const q=$("bagDetailSearch").value.toLowerCase();$("bagDetailRows").querySelectorAll("tr").forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(q))}
+function closeBagDetails(){$("bagDialog").close()}
+function tab(n){$("app").hidden=n!==1;$("app2").hidden=n!==2;$("t1").classList.toggle("on",n===1);$("t2").classList.toggle("on",n===2);if(n===2)render2()}
+function tb2(d,v){const s=B[d];s.has(v)?s.delete(v):s.add(v);render2()}
+function grp(){const m={};BG.forEach(([c,n,d,t])=>{const o=m[d]||(m[d]={d,pb:0,pp:0,ob:0,op:0,last:""});if(c===0){o.pb++;o.pp+=n;if(t>o.last)o.last=t}else if(c===1){o.ob++;o.op+=n}});
+ return Object.values(m).map(o=>{const ts=rows.filter(r=>r.s<2&&(r.destN===o.d||(r.sn||[]).includes(o.d))).sort((a,b)=>a.rel.localeCompare(b.rel));o.ts=ts;o.nx=ts[0]||null;o.belt=BM[o.d]||"-";
+  if(!o.pb)o.lv=0;else if(!o.nx){o.lv=3;o.m="ไม่มีรอบรถรองรับ (ที่ยังไม่ออก)"}else{const mn=mins(o.nx.rel);if(mn<0){o.lv=3;o.m="เลยเวลาปล่อย "+Math.round(-mn)+" นาที รถยังไม่ออก ของค้างอยู่"}else if(mn<=W){o.lv=2;o.m="ปล่อยในอีก "+Math.round(mn)+" นาที แต่ของยังค้าง"}else{o.lv=1;o.m="ปล่อยในอีก "+Math.round(mn)+" นาที"}}
+  return o})}
+function selectBagChartBranch(index){const branch=visibleChartBranches[index];if(!branch)return;B.q=B.q===branch.dest?"":branch.dest;const input=$("q2");if(input)input.value=B.q;render2()}
+function bagRecordMatches(status,dest,time,group,latestTime){return !!group&&!(bagMetric==="bagged"&&status!==0)&&!(bagMetric==="latest"&&(status!==0||time!==latestTime))&&!(bagMetric==="transit"&&status!==1)&&!(bagMetric==="urgent"&&group.lv!==3)&&!(bagMetric==="near"&&group.lv!==2)&&!(B.lv.size&&!B.lv.has(group.lv))&&!(B.q&&!dest.toLowerCase().includes(B.q.toLowerCase()))&&!(B.belt.size&&!B.belt.has(group.belt))}
+let visibleChartBranches=[],visibleTimeChartBranches=[];
+function selectBagTimeChartBranch(index){const branch=visibleTimeChartBranches[index];if(!branch)return;B.q=B.q===branch.dest?"":branch.dest;const input=$("q2");if(input)input.value=B.q;render2()}
+function renderBagChart(groups,latestTime){
+ const colors=["#ffc82c","#4caf74","#5b9bd5","#ef6a5b","#b28be8","#3fb2b8","#f08ac0","#9a978a"],byDest={},groupByDest=Object.fromEntries(groups.map(o=>[o.d,o]));
+ const statusCounts=[0,0,0];
+ BG.forEach(([status,qty,dest,time])=>{if(!dest)return;const group=groupByDest[dest];if(!bagRecordMatches(status,dest,time,group,latestTime))return;const belt=group.belt;const branch=byDest[dest]||(byDest[dest]={dest,total:0,bags:0,belts:{}}),series=branch.belts[belt]||(branch.belts[belt]={bags:0,pieces:0});series.bags++;series.pieces+=qty;branch.total+=qty;branch.bags++;statusCounts[status]=(statusCounts[status]||0)+1});
+ const branches=Object.values(byDest).sort((a,b)=>b.total-a.total||a.dest.localeCompare(b.dest)),belts=[...new Set(branches.flatMap(b=>Object.keys(b.belts)))].sort(),totalPieces=branches.reduce((s,b)=>s+b.total,0),totalBags=branches.reduce((s,b)=>s+b.bags,0);visibleChartBranches=branches;
+ const activeFilters=[B.q?"สาขา: "+B.q:"",B.belt.size?"สายพาน: "+[...B.belt].join(", "):"",B.lv.size?"ระดับ: "+[...B.lv].map(i=>LV[i][0]).join(", "):"",bagMetric!=="all"?"สรุป: "+({bagged:"แบ็กกิ้งแล้ว",latest:"ถุงแบ็กกิ้งล่าสุด",transit:"ระหว่างการขนส่ง",urgent:"เร่งด่วน",near:"ใกล้ปล่อย"}[bagMetric]||""):""].filter(Boolean);
+ $("bagChartSummary").textContent="ข้อมูลตามตัวกรอง"+(activeFilters.length?" · "+activeFilters.join(" · "):"ทั้งหมด")+" · รวมทุกสถานะ: "+fm(totalBags)+" ถุง / "+fm(totalPieces)+" ชิ้น · แบ็กกิ้งแล้ว "+fm(statusCounts[0])+" ถุง · ระหว่างการขนส่ง "+fm(statusCounts[1])+" ถุง · "+branches.length+" สาขา";
+ $("bagChartLegend").innerHTML=belts.map((belt,i)=>'<span><i style="background:'+colors[i%colors.length]+'"></i>'+escapeHtml(belt)+'</span>').join("");
+ if(!branches.length){$("bagChart").innerHTML='<div class="bag-dialog-empty">ไม่มีข้อมูล BG ตามตัวกรองที่เลือก</div>';return}
+ const width=Math.max(1000,branches.length*76+110),height=470,left=72,right=28,top=30,plotH=300,bottom=top+plotH,plotW=width-left-right,max=Math.max(1,...branches.flatMap(b=>belts.map(v=>b.belts[v]?.pieces||0))),step=max/5;
+ const x=i=>left+(branches.length===1?plotW/2:i*plotW/(branches.length-1)),y=v=>bottom-v/max*plotH;
+ let svg='<svg class="bag-chart" role="img" aria-label="กราฟเส้นยอดจำนวนชิ้น BG แยกสายพานและสาขา" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'">';
+ for(let i=0;i<=5;i++){const value=step*i,yy=y(value);svg+='<line class="grid" x1="'+left+'" y1="'+yy+'" x2="'+(width-right)+'" y2="'+yy+'"></line><text x="'+(left-10)+'" y="'+(yy+4)+'" text-anchor="end">'+fm(Math.round(value))+'</text>'}
+ svg+='<text class="axis-title" x="18" y="'+(top+plotH/2)+'" transform="rotate(-90 18 '+(top+plotH/2)+')" text-anchor="middle">จำนวนชิ้น BG</text>';
+ branches.forEach((b,i)=>svg+='<text x="'+x(i)+'" y="'+(bottom+18)+'" transform="rotate(-48 '+x(i)+' '+(bottom+18)+')" text-anchor="end">'+escapeHtml(b.dest)+'</text>');
+ belts.forEach((belt,bi)=>{const color=colors[bi%colors.length],points=branches.map((b,i)=>({x:x(i),y:y(b.belts[belt]?.pieces||0),branch:b,value:b.belts[belt]?.pieces||0,bags:b.belts[belt]?.bags||0,index:i})),area="M"+points.map(p=>p.x+","+p.y).join(" L")+" L"+points[points.length-1].x+","+bottom+" L"+points[0].x+","+bottom+" Z";svg+='<defs><linearGradient id="chart-fill-'+bi+'" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="'+color+'"></stop><stop offset="100%" stop-color="'+color+'" stop-opacity="0"></stop></linearGradient></defs><path class="area" d="'+area+'" fill="url(#chart-fill-'+bi+')"></path><polyline class="line" pathLength="1" stroke="'+color+'" style="color:'+color+'" points="'+points.map(p=>p.x+','+p.y).join(" ")+'"></polyline>';points.forEach(p=>{svg+='<circle class="point" cx="'+p.x+'" cy="'+p.y+'" r="4" fill="'+color+'" style="color:'+color+';animation-delay:'+Math.min(p.index*4,450)+'ms" tabindex="0" role="button" aria-label="'+escapeHtml(belt+" · "+p.branch.dest+" · "+fm(p.value)+" ชิ้น / "+fm(p.bags)+" ถุง · คลิกเพื่อกรองสาขา")+'" onclick="selectBagChartBranch('+p.index+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();selectBagChartBranch('+p.index+')}"><title>'+escapeHtml(belt+" · "+p.branch.dest+" · "+fm(p.value)+" ชิ้น / "+fm(p.bags)+" ถุง · คลิกเพื่อกรองสาขา")+'</title></circle>'})});
+ svg+='<text class="axis-title" x="'+(left+plotW/2)+'" y="'+(height-8)+'" text-anchor="middle">สาขา (เรียงตามยอดชิ้นรวมจากมากไปน้อย) · ชี้จุดเพื่อดูยอด · คลิกจุดเพื่อกรองสาขา</text></svg>';
+ $("bagChart").innerHTML=svg
+}
+function toggleBagStatus(metric){toggleBagMetric(metric)}
+function renderBagStatusDonut(groups,latestTime){
+ const counts=[0,0,0],groupByDest=Object.fromEntries(groups.map(o=>[o.d,o]));
+ BG.forEach(([status,,dest,time])=>{if(!dest)return;const group=groupByDest[dest];if(!bagRecordMatches(status,dest,time,group,latestTime))return;counts[status===0?0:status===1?1:2]++});
+ const total=counts.reduce((sum,count)=>sum+count,0),colors=["#ef6a5b","#ffc82c","#77746d"],labels=["แบ็กกิ้งแล้ว","ระหว่างขนส่ง","สถานะอื่น/ไม่ระบุ"],metrics=["bagged","transit",null],radius=68,circumference=2*Math.PI*radius;
+ $("bagDonutSummary").textContent="ข้อมูลตามตัวกรอง · รวม "+fm(total)+" ถุง";
+ $("bagDonutLegend").innerHTML=labels.map((label,i)=>counts[i]?'<span><i style="background:'+colors[i]+'"></i>'+label+'<b>'+fm(counts[i])+' ('+(total?Math.round(counts[i]/total*100):0)+'%)</b></span>':"").join("")||'<span>ไม่มีข้อมูลถุงตามตัวกรอง</span>';
+ if(!total){$("bagDonut").innerHTML='<div class="bag-dialog-empty">'+(BG.length?"ไม่มีข้อมูลถุงตามตัวกรองที่เลือก":"กรุณาอัปโหลดไฟล์ถุงแบ็กกิ้งเพื่อแสดงกราฟ")+'</div>';return}
+ let svg='<svg class="bag-donut" viewBox="0 0 200 200" role="img" aria-label="กราฟโดนัทสถานะถุงแบ็กกิ้ง รวม '+fm(total)+' ถุง"><circle cx="100" cy="100" r="'+radius+'" stroke="var(--bd)" stroke-width="24"></circle>';
+ let offset=0;
+ counts.forEach((count,i)=>{if(!count)return;const length=count/total*circumference,title=labels[i]+" "+fm(count)+" ถุง ("+Math.round(count/total*100)+"%)",action=metrics[i]?' tabindex="0" role="button" aria-label="'+escapeHtml(title)+' คลิกเพื่อกรองสถานะ" onclick="toggleBagStatus(\''+metrics[i]+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleBagStatus(\''+metrics[i]+'\')}"':"";svg+='<circle cx="100" cy="100" r="'+radius+'" stroke="'+colors[i]+'" stroke-dasharray="'+length+' '+(circumference-length)+'" stroke-dashoffset="'+(-offset)+'" transform="rotate(-90 100 100)"'+action+'><title>'+escapeHtml(title)+'</title></circle>';offset+=length});
+ svg+='<text class="bag-donut-center" x="100" y="98">'+fm(total)+'</text><text class="bag-donut-caption" x="100" y="120">ถุงทั้งหมด</text></svg>';$("bagDonut").innerHTML=svg
+}
+function renderBagTimeChart(groups,latestTime,prefix="bag",interactive=true){
+ const summaryId=prefix+"TimeChartSummary",legendId=prefix+"TimeChartLegend",chartId=prefix+"TimeChart";
+ const colors=["#ef6a5b","#ffc82c","#77746d"],labels=["ก่อน 02:00","02:00 เป็นต้นไป","ไม่ระบุเวลา"],byDest={},groupByDest=Object.fromEntries(groups.map(o=>[o.d,o]));
+ BG.forEach(([status,,dest,time])=>{if(!dest)return;const group=groupByDest[dest];if(!bagRecordMatches(status,dest,time,group,latestTime))return;const match=String(time||"").match(/(?:^|\s)(\d{1,2}):(\d{2})/),hour=match?Number(match[1]):-1,category=hour<0||hour>23||Number(match[2])>59?2:hour<2?0:1,branch=byDest[dest]||(byDest[dest]={dest,counts:[0,0,0],total:0});branch.counts[category]++;branch.total++});
+ const branches=Object.values(byDest).sort((a,b)=>b.total-a.total||a.dest.localeCompare(b.dest)),totals=[0,0,0];visibleTimeChartBranches=branches;branches.forEach(branch=>branch.counts.forEach((n,i)=>totals[i]+=n));
+ $(summaryId).textContent="ข้อมูลตามตัวกรอง · ก่อน 02:00: "+fm(totals[0])+" ถุง ("+(totals[0]+totals[1]+totals[2]?Math.round(totals[0]/(totals[0]+totals[1]+totals[2])*100):0)+"%) · ตั้งแต่ 02:00: "+fm(totals[1])+" ถุง · ไม่ระบุเวลา: "+fm(totals[2])+" ถุง · รวม "+fm(totals.reduce((a,b)=>a+b,0))+" ถุง";
+ $(legendId).innerHTML=labels.map((label,i)=>'<span><i style="background:'+colors[i]+'"></i>'+label+'</span>').join("");
+ if(!branches.length){$(chartId).innerHTML='<div class="bag-dialog-empty">'+(BG.length?"ไม่มีข้อมูล BG ตามตัวกรองที่เลือก":"กรุณาอัปโหลดไฟล์ถุงแบ็กกิ้งเพื่อแสดงกราฟ")+'</div>';return}
+ const width=Math.max(1000,branches.length*76+110),height=470,left=72,right=28,top=30,plotH=300,bottom=top+plotH,plotW=width-left-right,barW=Math.min(36,plotW/branches.length*.58),x=i=>left+(branches.length===1?plotW/2:i*plotW/(branches.length-1)),y=p=>bottom-p/100*plotH;
+ let svg='<svg class="bag-chart bag-time-chart" role="img" aria-label="กราฟแท่งสัดส่วนถุงแบ็กกิ้งก่อนและหลังเวลา 02:00 แยกตามสาขา" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'">';
+ for(let i=0;i<=4;i++){const value=i*25,yy=y(value);svg+='<line class="grid" x1="'+left+'" y1="'+yy+'" x2="'+(width-right)+'" y2="'+yy+'"></line><text x="'+(left-10)+'" y="'+(yy+4)+'" text-anchor="end">'+value+'%</text>'}
+ svg+='<text class="axis-title" x="18" y="'+(top+plotH/2)+'" transform="rotate(-90 18 '+(top+plotH/2)+')" text-anchor="middle">สัดส่วนถุง</text>';
+ branches.forEach((branch,i)=>{const total=branch.total,center=x(i),name=escapeHtml(branch.dest),destArg=escapeHtml(JSON.stringify(branch.dest));let offset=bottom;branch.counts.forEach((count,ci)=>{if(!count)return;const pct=count/total*100,h=pct/100*plotH;offset-=h;const title=labels[ci]+" · "+branch.dest+" · "+fm(count)+" ถุง ("+pct.toFixed(1)+"%) · รวม "+fm(total)+" ถุง",action=interactive?' tabindex="0" role="button" aria-label="'+escapeHtml(title+' · คลิกเพื่อดูเลขถุงและจำนวนชิ้น')+'" onclick="showBagDetailsForDest('+destArg+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();showBagDetailsForDest('+destArg+')}"':"";svg+='<rect class="time-segment" x="'+(center-barW/2)+'" y="'+offset+'" width="'+barW+'" height="'+h+'" rx="2" fill="'+colors[ci]+'" style="animation-delay:'+Math.min(i*4,450)+'ms"'+action+'><title>'+escapeHtml(title)+(interactive?" · คลิกเพื่อดูเลขถุงและจำนวนชิ้น":"")+'</title></rect>'});svg+='<text x="'+center+'" y="'+(bottom+18)+'" transform="rotate(-48 '+center+' '+(bottom+18)+')" text-anchor="end">'+name+'</text><text x="'+center+'" y="'+(Math.max(top+12,bottom-total/total*plotH-7))+'" text-anchor="middle">'+fm(total)+'</text>'});
+ svg+='<text class="axis-title" x="'+(left+plotW/2)+'" y="'+(height-8)+'" text-anchor="middle">สาขา (เรียงตามจำนวนถุงรวม) · ชี้แท่งเพื่อดูสัดส่วนและจำนวน'+(interactive?" · คลิกแท่งเพื่อดูเลขถุงและจำนวนชิ้น":"")+'</text></svg>';$(chartId).innerHTML=svg
+}
+function render2(){if($("app2").hidden)return;
+ if(!sh2){sh2=true;$("app2").innerHTML='<div class="bag-expiry-notice" id="bagExpiryNotice" role="status" hidden><div class="bag-expiry-copy"><strong id="bagExpiryText"></strong><div class="bag-expiry-help">ใช้ไฟล์รายงานรายละเอียดถุงแบ็กกิ้ง (.xlsx, .xls หรือ .csv) ไม่ใช่ไฟล์แผนรอบรถ · ต้องมีคอลัมน์ เลขแบ็กกิ้ง, สถานะแบ็กกิ้ง, จำนวน Bagging, สาขาปลายทาง และ เวลาแบ็กกิ้ง</div></div><button type="button" onclick="bagFi.click()">เลือกไฟล์ถุงแบ็กกิ้ง</button></div><div class="card"><div class="sub" id="fr" style="color:var(--mu)"></div></div><div class="kp" id="k2"></div><div class="card"><h2>ตัวกรองและค้นหาสาขา</h2><div class="f"><label for="q2">ค้นหาสาขาปลายทาง (ใช้กรองทุกกราฟและตาราง)</label><input type="search" id="q2" placeholder="พิมพ์ชื่อสาขาเพื่อกรองข้อมูล" oninput="B.q=this.value;render2()"><label style="min-width:0"><input type="checkbox" style="min-width:0;flex:none;width:auto" onchange="B.all=this.checked;render2()"> รวมปลายทางที่ไม่มีของค้าง</label><select id="w2" onchange="W=+this.value;draw()"></select></div><div id="c2"></div></div><div class="bag-summary-grid"><div class="card"><h2>สัดส่วนสถานะถุงแบ็กกิ้ง</h2><div id="bagDonutSummary" class="bag-donut-summary sub"></div><div class="bag-donut-wrap"><div id="bagDonut"></div><div id="bagDonutLegend" class="bag-donut-legend"></div></div></div><div class="card"><h2>สัดส่วนถุงแบ็กกิ้ง ก่อนและหลัง 02:00 แยกตามสาขา</h2><div id="bagTimeChartSummary" class="sub"></div><div id="bagTimeChartLegend" class="bag-chart-legend"></div><div id="bagTimeChart" class="bag-chart-wrap"></div></div></div><div class="card"><h2>กราฟเส้นยอด BG รายชิ้น แยกตามสายพานและสาขา</h2><div id="bagChartSummary" class="sub"></div><div id="bagChartLegend" class="bag-chart-legend"></div><div id="bagChart" class="bag-chart-wrap"></div></div><div class="card"><h2 id="h2"></h2><div class="tb"><table id="tb2"></table></div></div>'}
+ const g2=grp(),pend=BG.filter(x=>x[0]===0),outb=BG.filter(x=>x[0]===1),sum=a=>a.reduce((s,x)=>s+x[1],0),mx=a=>a.reduce((m,x)=>x[3]>m?x[3]:m,"");
+ const lastP=mx(pend),lastA=mx(BG),nU=g2.filter(o=>o.lv===3).length,nW=g2.filter(o=>o.lv===2).length;
+ $("fr").textContent="ข้อมูลแบ็กกิ้งล่าสุดเวลา "+lastA.slice(11,16)+" น. เทียบกับเวลาปัจจุบัน "+nowS.slice(11)+" น. (หลังไฟล์นี้อาจมีการสแกนออกเพิ่ม ยอดค้างจริงอาจน้อยกว่านี้)"+(bagFileName?" · ไฟล์นำเข้า: "+bagFileName+" ("+BG.length+" ถุง)":"");
+ const metrics=[["all","ถุงทั้งหมด",fm(BG.length),fm(sum(BG))+" ชิ้น","--c0"],["bagged","แบ็กกิ้งแล้ว (ยังไม่สแกนออก)",fm(pend.length),fm(sum(pend))+" ชิ้น","--c4"],["transit","สแกนออกแล้ว (ระหว่างขนส่ง)",fm(outb.length),fm(sum(outb))+" ชิ้น","--c2"],["latest","แบ็กกิ้งล่าสุดของถุงค้าง",lastP.slice(11,16)||"-",pend.length?"ผ่านมา "+Math.round(-mins(lastP))+" นาที":"","--c1"],["urgent","เร่งด่วน",nU,"ปลายทาง","--c5"],["near","ใกล้ปล่อยแต่ของยังค้าง",nW,"ปลายทาง","--c4"]];
+ $("k2").innerHTML=metrics.map(k=>'<div class="k metric-card'+(bagMetric===k[0]?" active":"")+'" role="button" tabindex="0" aria-pressed="'+(bagMetric===k[0])+'" onclick="toggleBagMetric(\''+k[0]+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleBagMetric(\''+k[0]+'\')}" style="border-top-color:var('+k[4]+')"><b>'+k[2]+'</b><span>'+k[1]+' · '+k[3]+'</span></div>').join("");
+ const belts=[...new Set(g2.map(o=>o.belt))].sort();
+ $("c2").innerHTML='<div class="f"><label>สายพาน</label>'+belts.map(v=>'<button class="chip'+(B.belt.has(v)?" on":"")+'" onclick="tb2(\'belt\',\''+v+'\')">'+v+'</button>').join("")+'</div><div class="f"><label>ระดับ</label>'+[3,2,1].map(i=>'<button class="chip'+(B.lv.has(i)?" on":"")+'" onclick="tb2(\'lv\','+i+')">'+LV[i][0]+'<i>'+g2.filter(o=>o.lv===i).length+'</i></button>').join("")+'</div>';
+ renderBagStatusDonut(g2,lastP);
+ renderBagChart(g2,lastP);
+ renderBagTimeChart(g2,lastP);
+ $("w2").innerHTML=[15,30,45,60,90].map(v=>'<option value="'+v+'"'+(W===v?" selected":"")+'>เฝ้าระวังล่วงหน้า '+v+' นาที</option>').join("");
+ const L=g2.filter(o=>{const metricMatch=bagMetric==="all"?(B.all||o.pb):bagMetric==="bagged"?o.pb>0:bagMetric==="latest"?o.last===lastP&&!!lastP:bagMetric==="transit"?o.ob>0:bagMetric==="urgent"?o.lv===3:o.lv===2;return metricMatch&&(!B.belt.size||B.belt.has(o.belt))&&(!B.lv.size||B.lv.has(o.lv))&&(!B.q||o.d.toLowerCase().includes(B.q.toLowerCase()))}).sort((a,b)=>b.pb-a.pb||b.pp-a.pp||b.lv-a.lv);visibleBagGroups=L;
+ $("h2").textContent="เทียบถุงค้างกับรอบรถที่ใกล้ปล่อยที่สุด ("+L.length+" ปลายทาง)";
+ $("tb2").innerHTML='<tr><th>ปลายทาง</th><th>สายพาน</th><th>ถุงยังไม่ระหว่างขนส่ง</th><th>ชิ้นค้าง</th><th>แบ็กกิ้งล่าสุด</th><th>สแกนออกแล้ว (ถุง / ชิ้น)</th><th>รอบรถที่ใกล้ปล่อยที่สุด (ยังไม่ออก)</th><th>แจ้งเตือน</th><th>รายละเอียด</th></tr>'+(L.length?L.map((o,i)=>{const x=o.nx;return '<tr class="detail-row '+(o.lv===3?"late":o.lv===2?"warn":"")+'" onclick="showBagDetailsByIndex('+i+')"><td><b>'+o.d+'</b></td><td>'+o.belt+'</td><td>'+o.pb+'</td><td><b>'+fm(o.pp)+'</b></td><td>'+(o.last.slice(11,16)||"-")+'</td><td>'+o.ob+' / '+fm(o.op)+'</td><td>'+(x?'<b>'+T(x.rel)+'</b> · '+x.plate+' · '+x.co+' · '+ST[x.s][1]+(o.ts.length>1?' (+'+(o.ts.length-1)+' รอบ)':""):"-")+'</td><td class="'+(o.lv===3?"lt":o.lv===2?"am":"")+'">'+(o.m||"")+'</td><td><button class="detail-btn" type="button" onclick="event.stopPropagation();showBagDetailsByIndex('+i+')">ดูรายละเอียด</button></td></tr>'}).join(""):'<tr><td colspan="9" style="text-align:center;color:var(--mu);padding:24px">ไม่พบข้อมูลตามเงื่อนไข</td></tr>');updateBagExpiry()}
+let CODE={};function buildCode(){CODE={};const pl=k=>{const m=k.replace(/^\d+\s+/,"").match(/^(Drop[_-])?([A-Za-z0-9]+)/);return m?[!!m[1],m[2]]:null};
+ Object.keys(BM).forEach(k=>{const p=pl(k);if(p&&!p[0]&&!CODE[p[1]])CODE[p[1]]=k});
+ Object.keys(BM).forEach(k=>{const p=pl(k);if(p&&p[0]&&!CODE[p[1]])CODE[p[1]]=k});
+ rows.forEach(r=>{if(r.dest&&r.destN)CODE[r.dest]=r.destN})}
+function decor(){buildCode();rows.forEach(r=>{r.sn=r.stops.map(s=>CODE[s]||"");r.miss=r.stops.filter((s,i)=>!r.sn[i]);r.mode=(r.stops.length>1||r.belt==="พ่วงงานสาขา"||r.miss.length)?"พ่วงดรอป":"ปลายทางเดียว";r.via=r.mode==="พ่วงดรอป"?r.stops:[]})}
+function selStop(){const m={};f("stop").forEach(r=>new Set(r.via).forEach(s=>m[s]=(m[s]||0)+1));const all=Object.keys(m).concat(A.stop&&!m[A.stop]?[A.stop]:[]).sort();return '<select onchange="A.stop=this.value;draw()"><option value="">สาขาที่พ่วง: ทั้งหมด</option>'+all.map(v=>'<option value="'+v+'"'+(A.stop===v?" selected":"")+'>'+v+' · '+(CODE[v]||"ไม่พบในฐานข้อมูล (พ่วง)")+' ('+(m[v]||0)+')</option>').join("")+'</select>'}
+function init(){
+ $("app").innerHTML='<div class="wp" id="wp"></div><div class="kp" id="kp"></div><div class="card"><h2>จำนวนรอบตามชั่วโมงที่ปล่อยรถ (กดแท่งเพื่อกรอง)</h2><div class="ch" id="ch"></div></div>'+
+ '<div class="card"><h2>ตัวกรอง</h2><div class="f"><input type="search" id="q" placeholder="ค้นหา ชื่อสาย / ทะเบียน / คนขับ / ปลายทาง / บริษัท" oninput="A.q=this.value;draw()">'+
+ '<label style="min-width:0">ปล่อยรถ</label><input type="time" id="tf" oninput="A.from=this.value;draw()"><span>ถึง</span><input type="time" id="tt" oninput="A.to=this.value;draw()"></div>'+
+ '<div class="f" id="sl"></div><div id="cp"></div><div class="f"><label>ทางลัด</label><button class="chip" id="b1" onclick="A.late=!A.late;draw()">เลยเวลาปล่อย (ยังไม่ออก)</button><button class="chip" id="b2" onclick="A.early=!A.early;draw()">ปล่อยรถก่อนหรือเท่ากับ 07:00<i id="n2"></i></button><button class="chip" id="b3" onclick="A.warn=!A.warn;draw()">เฉพาะรอบที่มีแจ้งเตือน<i id="n3"></i></button><button class="chip" onclick="soon()">ปล่อยใน 2 ชั่วโมงข้างหน้า</button><span style="flex:1"></span><span class="sub" id="ac" style="color:var(--mu)"></span><button class="btn s" onclick="clr()">ล้างตัวกรอง</button></div></div>'+
+ '<div class="card"><h2 id="th"></h2><div class="tb"><table id="tb"></table></div></div>'}
+function draw(){
+ if(!rows.length){$("dz").hidden=false;$("app").innerHTML="";return}$("dz").hidden=true;
+ const n=new Date();nowS=n.getFullYear()+"-"+pad(n.getMonth()+1)+"-"+pad(n.getDate())+" "+pad(n.getHours())+":"+pad(n.getMinutes());
+ $("meta").textContent="ข้อมูลวันที่ "+rows[0].rel.slice(0,10)+"  |  ทั้งหมด "+rows.length+" รอบ  |  เวลา "+nowS.slice(11);
+ decor();rows.forEach(r=>r.w=wr(r));renderWP();render2();const bs=cntBy(f("st"),"s");
+ $("kp").innerHTML='<div class="k'+(A.st.size?"":" on")+'" role="button" tabindex="0" aria-pressed="'+(!A.st.size)+'" onclick="A.st.clear();draw()" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();A.st.clear();draw()}"><b>'+f("st").length+'</b><span>รอบทั้งหมด (ตามตัวกรอง)</span></div>'+
+  ST.map((s,i)=>'<div class="k'+(A.st.has(i)?" on":"")+'" role="button" tabindex="0" aria-pressed="'+A.st.has(i)+'" style="border-top-color:var('+s[2]+')" onclick="tg(\'st\','+i+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tg(\'st\','+i+')}"><b>'+(bs[i]||0)+'</b><span>'+s[1]+'</span></div>').join("");
+ const bh=f("hour"),hrs=[...Array(24).keys()].filter(h=>rows.some(r=>r.h===h)),mh=Math.max(1,...hrs.map(h=>bh.filter(r=>r.h===h).length));
+ $("ch").innerHTML=hrs.map((h,hi)=>{const rs=bh.filter(r=>r.h===h),breakdown=ST.map((s,i)=>{const c=rs.filter(r=>r.s===i).length;return c?s[1]+" "+c+" รอบ":""}).filter(Boolean).join(" · ");return '<div class="col'+(A.hour===h?" on":"")+'" role="button" tabindex="0" aria-pressed="'+(A.hour===h)+'" title="เวลา '+pad(h)+":00 · "+rs.length+" รอบ"+(breakdown?" · "+breakdown:"")+'" onclick="tgh('+h+')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();tgh('+h+')}" style="--bar-delay:'+Math.min(hi*35,420)+'ms"><span class="n">'+rs.length+'</span><div class="st" style="height:'+(rs.length/mh*90)+'px">'+ST.map((s,i)=>{const c=rs.filter(r=>r.s===i).length;return c?'<div style="flex:'+c+';background:var('+s[2]+');animation-delay:calc(var(--bar-delay) + '+i*45+'ms)"></div>':""}).join("")+'</div><small>'+pad(h)+'</small></div>'}).join("");
+ $("sl").innerHTML='<label>บริษัท / ปลายทาง</label>'+sel("co","บริษัท")+sel("dest","ปลายทาง")+selStop();
+ $("cp").innerHTML=chips("belt","สายพาน")+chips("mode","รูปแบบงาน")+chips("type","ประเภทเส้นทาง")+chips("veh","ชนิดรถ")+chips("attr","คุณลักษณะ");
+ $("b1").classList.toggle("on",A.late);$("b2").classList.toggle("on",A.early);$("b3").classList.toggle("on",A.warn);$("n3").textContent=f("warn").filter(r=>r.w).length;$("n2").textContent=f("early").filter(r=>T(r.rel)<="07:00").length;
+ const na=A.st.size+A.belt.size+A.type.size+A.veh.size+A.attr.size+(A.co?1:0)+(A.dest?1:0)+(A.q?1:0)+(A.from||A.to?1:0)+(A.hour>=0?1:0)+(A.late?1:0)+(A.early?1:0)+(A.warn?1:0)+A.mode.size+(A.stop?1:0);
+ $("ac").textContent=na?"ใช้ตัวกรอง "+na+" รายการ":"";
+ const list=f().sort((a,b)=>a.rel.localeCompare(b.rel));$("th").textContent="รายการรอบรถ ("+list.length+" รอบ)";
+ $("tb").innerHTML='<tr><th>สแตนบาย</th><th>เวลาปล่อย</th><th>สถานะ</th><th>ปลายทาง</th><th>สายพาน</th><th>จุดส่ง</th><th>ประเภท</th><th>ชนิดรถ</th><th>ทะเบียน</th><th>บริษัท</th><th>คนขับ</th><th>โทร</th><th>ถึงปลายทาง</th><th>แจ้งเตือน</th></tr>'+
+  (list.length?list.map(r=>'<tr class="'+(late(r)||(r.w&&r.w.lv===2)?"late":r.w?"warn":"")+'"><td>'+T(r.stby)+'</td><td class="'+(late(r)?"lt":"")+'">'+T(r.rel)+'</td><td><span class="b" style="color:var('+ST[r.s][2]+');border-color:var('+ST[r.s][2]+')">'+ST[r.s][1]+'</span></td><td title="'+r.destN+'">'+r.dest+'</td><td><b>'+r.belt+'</b></td><td>'+r.stops.map((s,i)=>'<div><b>'+s+'</b> '+(r.sn[i]?r.sn[i]:'<span class="am">ไม่พบในฐานข้อมูล (พ่วง)</span>')+'</div>').join("")+(r.mode==="พ่วงดรอป"?'<span class="tag">พ่วง</span>':"")+'</td><td>'+r.type+(r.attr==="รถเสริม"?" (เสริม)":"")+'</td><td>'+r.veh+'</td><td>'+r.plate+'</td><td>'+r.co+'</td><td>'+r.drv+'</td><td>'+r.tel+'</td><td>'+T(r.end)+'</td><td class="'+(r.w?(r.w.lv===2?"lt":"am"):"")+'">'+(r.w?r.w.m:"")+'</td></tr>').join(""):'<tr><td colspan="14" style="text-align:center;color:var(--mu);padding:24px">ไม่พบรอบรถตามเงื่อนไขที่เลือก</td></tr>')}
+let RAW=[];function load(raw){RAW=raw;rows=norm(raw);A=A0();if(rows.length){init();}draw()}
+function readFile(f,kind="auto"){
+ const rd=new FileReader();
+ rd.onerror=()=>alert("อ่านไฟล์ไม่ได้: เบราว์เซอร์ไม่สามารถเปิดไฟล์นี้ได้");
+ rd.onload=e=>{try{
+  if(!window.XLSX)throw new Error("โหลดตัวอ่าน Excel ไม่สำเร็จ กรุณาตรวจการเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่");
+  const wb=XLSX.read(e.target.result,{type:"array"});if(!wb.SheetNames.length)throw new Error("ไม่พบแผ่นงานในไฟล์");
+  const bagHeaders=["เลขแบ็กกิ้ง","สถานะแบ็กกิ้ง","จำนวน Bagging","สาขาปลายทาง","เวลาแบ็กกิ้ง"];
+  if(kind==="bags"){
+   let bagSheet=null;
+   for(const name of wb.SheetNames){const ws=wb.Sheets[name],a=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:""}),headers=(a[0]||[]).map(v=>String(v).trim());if(bagHeaders.every(h=>headers.includes(h))){bagSheet=ws;break}}
+   if(!bagSheet)throw new Error("ไม่พบตารางถุงแบ็กกิ้งที่มีคอลัมน์เลขแบ็กกิ้ง, สถานะแบ็กกิ้ง, จำนวน Bagging, สาขาปลายทาง และเวลาแบ็กกิ้ง");
+   loadBags(XLSX.utils.sheet_to_json(bagSheet,{defval:"",raw:false}),f.name);return
+  }
+  const ws=wb.Sheets[wb.SheetNames[0]],a=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:""});
+  if(a.length&&a[0].includes("เลขแบ็กกิ้ง")){loadBags(XLSX.utils.sheet_to_json(ws,{defval:"",raw:false}),f.name);return}
+  if(a.length&&!a[0].includes("ชื่อเส้นทางเดินรถ")){const m={};a.forEach(x=>{const d=String(x[0]||"").trim(),b=String(x[1]||"").trim();if(d&&b){m[d]=m[d]||[];if(!m[d].includes(b))m[d].push(b)}});BM={};for(const k in m)BM[k]=m[k].sort().join(" / ");BM["WTC_SP-วังท่าช้าง"]="E05";rows=norm(RAW);draw()}
+  else load(XLSX.utils.sheet_to_json(ws,{defval:"",raw:false}))
+ }catch(x){alert("นำเข้าไฟล์ไม่สำเร็จ: "+(x&&x.message?x.message:String(x)))}};
+ rd.readAsArrayBuffer(f)
+}
+fi.onchange=e=>{if(e.target.files[0])readFile(e.target.files[0]);e.target.value=""};
+bagFi.onchange=e=>{if(e.target.files[0])readFile(e.target.files[0],"bags");e.target.value=""};
+document.addEventListener("dragover",e=>e.preventDefault());document.addEventListener("drop",e=>{e.preventDefault();e.dataTransfer.files[0]&&readFile(e.dataTransfer.files[0])});
+setInterval(()=>rows.length&&draw(),60000);
+setInterval(updateBagExpiry,1000);
+draw();
+</script>
+</body>
+</html>
